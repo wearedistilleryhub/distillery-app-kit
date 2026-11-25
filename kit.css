@@ -1,0 +1,81 @@
+/* distillery app kit v0.1.0 — tokens and base
+   Load once per app:
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wearedistilleryhub/distillery-app-kit@v0.1.0/kit.css">
+   Light is the default. Dark applies when the person picks it, or picks System and their device is dark.
+   The kit script sets data-theme on <html>; without the script, the system setting decides. */
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap");
+
+:root {
+  /* brand */
+  --d-blue: #296BFF;
+  --d-blue-deep: #0038B5;
+  --d-gray: #B7B7B7;
+  --d-paper: #F3F3F3;
+
+  /* surfaces and text (light) */
+  --d-bg: #F3F3F3;
+  --d-surface: #FFFFFF;
+  --d-surface-2: #F8F8F9;
+  --d-ink: #12151A;
+  --d-ink-soft: #5A616C;
+  --d-line: #DADDE2;
+  --d-accent: #296BFF;
+  --d-accent-ink: #FFFFFF;
+
+  /* motion marks */
+  --d-mark: #296BFF;
+  --d-mark-gray: #B7B7B7;
+  --d-mark-faint: rgba(41, 107, 255, 0.22);
+  --d-mark-ghost: rgba(18, 21, 26, 0.10);
+
+  /* status (separate from the accent) */
+  --d-ok: #1E8E5A;
+  --d-warn: #B26A00;
+  --d-error: #C8372D;
+
+  /* type */
+  --d-font: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --d-font-mono: "DM Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* shape and motion */
+  --d-radius-sm: 6px;
+  --d-radius: 10px;
+  --d-radius-lg: 16px;
+  --d-ease: cubic-bezier(0.65, 0, 0.35, 1);
+  --d-loop-idle: 1;
+  --d-loop-working: 1.6;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --d-bg: #0C0E10; --d-surface: #14171B; --d-surface-2: #1A1E23;
+    --d-ink: #ECEEF1; --d-ink-soft: #9198A3; --d-line: #262B32;
+    --d-accent: #5B8CFF; --d-mark: #5B8CFF; --d-mark-gray: #4A5059;
+    --d-mark-faint: rgba(91, 140, 255, 0.25); --d-mark-ghost: rgba(236, 238, 241, 0.10);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --d-bg: #0C0E10; --d-surface: #14171B; --d-surface-2: #1A1E23;
+  --d-ink: #ECEEF1; --d-ink-soft: #9198A3; --d-line: #262B32;
+  --d-accent: #5B8CFF; --d-mark: #5B8CFF; --d-mark-gray: #4A5059;
+  --d-mark-faint: rgba(91, 140, 255, 0.25); --d-mark-ghost: rgba(236, 238, 241, 0.10);
+  color-scheme: dark;
+}
+
+/* base: zero specificity, so any app style wins */
+:where(body) {
+  margin: 0;
+  background: var(--d-bg);
+  color: var(--d-ink);
+  font-family: var(--d-font);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* the app lockup: "distillery | App name" */
+:where(.d-lockup) { display: inline-flex; align-items: center; gap: 12px; font-family: var(--d-font); color: var(--d-ink); }
+:where(.d-lockup .d-brand) { font-size: 22px; font-weight: 400; letter-spacing: -0.02em; }
+:where(.d-lockup .d-sep) { width: 1px; height: 20px; background: var(--d-line); }
+:where(.d-lockup .d-app) { font-size: 20px; font-weight: 300; color: var(--d-ink-soft); }
